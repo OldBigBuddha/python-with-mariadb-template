@@ -11,7 +11,6 @@ services:
         NODE_VERSION: "lts/*"
         USER_UID: 1000
         USER_GID: 1000
-    container_name: python_dev_container
     volumes:
       - ..:/workspace:cached
     env_file:
@@ -21,7 +20,6 @@ services:
 
   db:
     image: mariadb
-    container_name: mariadb_for_python
     restart: unless-stopped
     volumes:
       - ../mysql:/var/lib/mysql
