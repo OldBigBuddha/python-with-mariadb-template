@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+      args:
+        VARIANT: 3
+        INSTALL_NODE: "true"
+        NODE_VERSION: "lts/*"
+        USER_UID: 1000
+        USER_GID: 1000
+    container_name: python_dev_container
+    volumes:
+      - ..:/workspace:cached
+    env_file:
+      - ../.env
+    command: sleep infinity
+    user: vscode
+
+  db:
+    image: mariadb
+    container_name: mariadb_for_python
+    restart: unless-stopped
+    volumes:
+      - ../mysql:/var/lib/mysql
+    env_file:
+      - ../.env
